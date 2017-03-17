@@ -1,0 +1,17 @@
+﻿using Newtonsoft.Json.Serialization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Sodao.JukeTool.Share
+{
+    public class LowercaseNameContractResolver : DefaultContractResolver
+    {
+        public LowercaseNameContractResolver()
+        {
+            NamingStrategy = new LowercaseNamingStrategy();
+        }
+    }
+}

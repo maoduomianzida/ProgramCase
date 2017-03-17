@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
+using System.IO;
 
 namespace ProgramCase.AutoFac
 {
-    [Main]
+    //[Main]
     public class AutoFacCase : ICase
     {
         private ContainerBuilder _builder;
@@ -22,14 +23,42 @@ namespace ProgramCase.AutoFac
 
         public void Run()
         {
-            Init();
-            IEnumerable<object> objectArr = _container.Resolve(typeof(IEnumerable<ICase>)) as IEnumerable<object>;
-            IEnumerable<ICase> printArr = objectArr.Cast<ICase>();
-            //IEnumerable<ICase> printArr = _container.Resolve<IEnumerable<ICase>>();
-            foreach (ICase tmp in printArr)
+            List<string> list = new List<string>();
+            for(int i = 0;i < 3000 ;i++)
             {
-                Console.WriteLine(tmp.GetType().Name);
+                int t = (i + 1) % 3;
+                switch(t)
+                {
+                    case 0: list.Add("content" + (i + 1)); break;
+                    case 1: list.Add("content" + (i + 1)); break;
+                    case 2: list.Add("content" + (i + 1)); break;
+                }
             }
+
+            List<List<string>> batchArr = new List<List<string>>();
+
+            int count = list.Count;
+            int batchCount = 1000;
+            int times = count / batchCount;
+            if (count % batchCount != 0)
+            {
+                times++;
+            }
+            for (int i = 0; i < times; i++)
+            {
+                int startIndex = i * batchCount;
+                if (i == times - 1)
+                {
+                    int residueCount = list.Count - startIndex;
+                    batchArr.Add(list.GetRange(startIndex, residueCount));
+                }
+                else
+                {
+                    batchArr.Add(list.GetRange(startIndex, batchCount));
+                }
+            }
+
+            Console.ReadKey();
         }
     }
 }

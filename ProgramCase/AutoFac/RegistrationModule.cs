@@ -11,8 +11,24 @@ namespace ProgramCase.AutoFac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(typeof(Program).Assembly).AsImplementedInterfaces();
-            //builder.Register(context => new IPrint[] { new APrint(), new BPrint() }).As<IEnumerable<IPrint>>();
+            //builder.RegisterAssemblyTypes(typeof(Program).Assembly).AsImplementedInterfaces();
+            /*builder.Register((context, paramArr) =>
+            {
+                string type = paramArr.Named<string>("type");
+
+                IPrint result;
+                if (type == "A")
+                {
+                    result = new APrint();
+                }
+                else
+                {
+                    result = new BPrint();
+                }
+
+                return result;
+            }).As<IPrint>().InstancePerOwned<IPrint>();*/
+            builder.RegisterType<BPrint>().As<IPrint>().InstancePerLifetimeScope().ExternallyOwned();
         }
     }
 }

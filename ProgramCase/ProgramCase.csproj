@@ -45,6 +45,10 @@
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
       <Private>True</Private>
@@ -97,6 +101,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="ZooKeeperNet, Version=3.4.6.1, Culture=neutral, PublicKeyToken=fefd2c046da35b56, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZooKeeper.Net.3.4.6.2\lib\net40\ZooKeeperNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoFac\AutoFacCase.cs" />
@@ -107,6 +115,33 @@
     <Compile Include="ICase.cs" />
     <Compile Include="AutoMapper\LongToDateTimeConverter.cs" />
     <Compile Include="MainAttribute.cs" />
+    <Compile Include="Newtonsoft\CustomerGroupCondition.cs" />
+    <Compile Include="Newtonsoft\Formatter\CustomerGroupConditionConverter.cs" />
+    <Compile Include="Newtonsoft\Formatter\IJsonFormatter.cs" />
+    <Compile Include="Newtonsoft\Formatter\JsonContentConverter.cs" />
+    <Compile Include="Newtonsoft\Formatter\JsonConvertCreater.cs" />
+    <Compile Include="Newtonsoft\Formatter\LowercaseNameContractResolver.cs" />
+    <Compile Include="Newtonsoft\Formatter\LowercaseNamingStrategy.cs" />
+    <Compile Include="Newtonsoft\NewtonsoftCase.cs" />
+    <Compile Include="Newtonsoft\Condition\ActivitysCondition.cs" />
+    <Compile Include="Newtonsoft\Condition\AveragePriceCondition.cs" />
+    <Compile Include="Newtonsoft\Condition\BuyTimeCondition.cs" />
+    <Compile Include="Newtonsoft\Condition\ConditionCollection.cs" />
+    <Compile Include="Newtonsoft\Condition\FansWxBindCondition.cs" />
+    <Compile Include="Newtonsoft\Condition\FollowTimeCondition.cs" />
+    <Compile Include="Newtonsoft\Condition\GenderCondition.cs" />
+    <Compile Include="Newtonsoft\Condition\InteractNumCondition.cs" />
+    <Compile Include="Newtonsoft\Condition\JoinNumCondition.cs" />
+    <Compile Include="Newtonsoft\Condition\JoinTimeCondition.cs" />
+    <Compile Include="Newtonsoft\Condition\MsgSendTimeCondition.cs" />
+    <Compile Include="Newtonsoft\Condition\ProductsCondition.cs" />
+    <Compile Include="Newtonsoft\Condition\SMSNumCondition.cs" />
+    <Compile Include="Newtonsoft\Condition\SMSTimeCondition.cs" />
+    <Compile Include="Newtonsoft\Condition\TagFilterCondition.cs" />
+    <Compile Include="Newtonsoft\Condition\TradeAmountCondition.cs" />
+    <Compile Include="Newtonsoft\Condition\TradeDateCondition.cs" />
+    <Compile Include="Newtonsoft\Condition\TradeNumCondition.cs" />
+    <Compile Include="Newtonsoft\Condition\WxBindCondition.cs" />
     <Compile Include="OfficeFile\AutoMapHelper.cs" />
     <Compile Include="OfficeFile\ColumnAttribute.cs" />
     <Compile Include="OfficeFile\ColumnFormatAttribute.cs" />
