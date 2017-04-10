@@ -1,9 +1,12 @@
-﻿using Sodao.Juketool.Share.Customer;
+﻿using Newtonsoft.Json;
+using Sodao.Juketool.Share.Customer;
+using Sodao.JukeTool.Share;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace ProgramCase.Newtonsoft
 {
@@ -17,41 +20,61 @@ namespace ProgramCase.Newtonsoft
 
         public void Run()
         {
-            AveragePriceCondition averagePrice = new AveragePriceCondition { Start = 10, End = 20 };
-            string json = averagePrice.Serialize();
-            AveragePriceCondition newAveragePrice = new AveragePriceCondition();
-            newAveragePrice.Deserialize(json);
+            Mapper.Initialize(config =>
+            {
+                config.CreateMap<A, B>().ForMember(tmp => tmp.Str, opts => opts.Ignore())
+                                                          .ForMember(tmp => tmp.Ids,opts => opts.ResolveUsing(c =>
+                                                          {
+                                                              List<long> l = new List<long>();
+                                                              if (!string.IsNullOrWhiteSpace(c.Str))
+                                                              {
+                                                                  foreach (string tmp in c.Str.Split(','))
+                                                                  {
+                                                                      long value;
+                                                                      if (long.TryParse(tmp, out value))
+                                                                          l.Add(value);
+                                                                  }
+                                                              }
 
-            Console.WriteLine(json);
-            Console.WriteLine(newAveragePrice.Start + " " + newAveragePrice.End);
+                                                              return l;
+                                                          }));
+                config.CreateMap<KeyValuePair<A, int>, B>().ConvertUsing((KeyValuePair<A,int> source,B target, ResolutionContext context) =>
+                {
+                    B b = context.Mapper.Map<B>(source.Key);
+                    b.Age = source.Value;
 
-            GenderCondition gender = new GenderCondition();
-            gender.Add(CustomerGender.Female.ToString());
-            gender.Add(CustomerGender.Male.ToString());
-            json = gender.Serialize();
-            Console.WriteLine(json);
-            GenderCondition newGender = new GenderCondition();
-            newGender.Deserialize(json);
-            Console.WriteLine(string.Join(",",newGender));
+                    return b;
+                });
+            });
+            Dictionary<A, int> dic = new Dictionary<A, int>();
+            dic.Add(new A { Id = 1, UserName = "wg", Str = "10,3,6" },11);
+            dic.Add(new A { Id = 2, UserName = "wh", Str = ",30," },12);
+            dic.Add(new A { Id = 3, UserName = "TT", Str = null },14);
+            List<B> list = Mapper.Instance.Map<List<B>>(dic);
 
-            ProductsCondition products = new ProductsCondition();
-            products.Add(new ProductSelect { Id = 1000, Title = "商品A" });
-            products.Add(new ProductSelect { Id = 1001, Title = "商品B" });
-            json = products.Serialize();
-            ProductsCondition newProducts = new ProductsCondition();
-            newProducts.Deserialize(json);
-
-            ConditionCollection conditionCollection = new ConditionCollection();
-            conditionCollection.Add(averagePrice);
-            conditionCollection.Add(gender);
-            conditionCollection.Add(products);
-
-            json = conditionCollection.Serialize();
-
-            Console.WriteLine(json);
-            ConditionCollection newConditionCollection = new ConditionCollection();
-            newConditionCollection.Deserialize(json);
-            
+            Console.WriteLine(list.Count);
         }
+    }
+
+    public class A
+    {
+        public int Id { get; set; }
+
+        public string UserName { get; set; }
+
+        public string Str { get; set; }
+    }
+
+    public class B
+    {
+        public int Id { get; set; }
+
+        public string UserName { get; set; }
+
+        public int Age { get; set; }
+
+        public long Str { get; set; }
+
+        public List<long> Ids { get; set; }
     }
 }

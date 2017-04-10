@@ -53,8 +53,8 @@
       <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NPOI, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
@@ -112,6 +112,54 @@
     <Compile Include="AutoFac\RegistrationModule.cs" />
     <Compile Include="AutoMapper\AutoMapperCase.cs" />
     <Compile Include="AutoMapper\DateTimeToLongConverter.cs" />
+    <Compile Include="AutoMapper\IJsonFormatter.cs" />
+    <Compile Include="AutoMapper\JsonFormatterStringConverter.cs" />
+    <Compile Include="Dapper\DapperCase.cs" />
+    <Compile Include="Dapper\DapperSourceCode\CommandDefinition.cs" />
+    <Compile Include="Dapper\DapperSourceCode\CommandFlags.cs" />
+    <Compile Include="Dapper\DapperSourceCode\CustomPropertyTypeMap.cs" />
+    <Compile Include="Dapper\DapperSourceCode\DataTableHandler.cs" />
+    <Compile Include="Dapper\DapperSourceCode\DbString.cs" />
+    <Compile Include="Dapper\DapperSourceCode\DefaultTypeMap.cs" />
+    <Compile Include="Dapper\DapperSourceCode\DynamicParameters.CachedOutputSetters.cs" />
+    <Compile Include="Dapper\DapperSourceCode\DynamicParameters.cs" />
+    <Compile Include="Dapper\DapperSourceCode\DynamicParameters.ParamInfo.cs" />
+    <Compile Include="Dapper\DapperSourceCode\ExplicitConstructorAttribute.cs" />
+    <Compile Include="Dapper\DapperSourceCode\FeatureSupport.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SimpleMemberMap.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlDataRecordHandler.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlDataRecordListTVPParameter.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.Async.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.CacheInfo.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.DapperRow.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.DapperRowMetaObject.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.DapperTable.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.DeserializerState.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.DontMap.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.GridReader.Async.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.GridReader.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.ICustomQueryParameter.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.IDataReader.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.Identity.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.IDynamicParameters.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.IMemberMap.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.IParameterCallbacks.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.IParameterLookup.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.ITypeHandler.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.ITypeMap.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.Link.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.LiteralToken.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.Settings.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.TypeDeserializerCache.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.TypeHandler.cs" />
+    <Compile Include="Dapper\DapperSourceCode\SqlMapper.TypeHandlerCache.cs" />
+    <Compile Include="Dapper\DapperSourceCode\TableValuedParameter.cs" />
+    <Compile Include="Dapper\DapperSourceCode\TypeExtensions.cs" />
+    <Compile Include="Dapper\DapperSourceCode\UdtTypeHandler.cs" />
+    <Compile Include="Dapper\DapperSourceCode\WrappedDataReader.cs" />
+    <Compile Include="Dapper\DapperSourceCode\WrappedReader.cs" />
+    <Compile Include="Dapper\DapperSourceCode\XmlHandlers.cs" />
     <Compile Include="ICase.cs" />
     <Compile Include="AutoMapper\LongToDateTimeConverter.cs" />
     <Compile Include="MainAttribute.cs" />
