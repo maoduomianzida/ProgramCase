@@ -1670,7 +1670,6 @@ namespace Dapper
             return reader => handler.Parse(type, reader.GetValue(startBound));
         }
 
-
         private static Exception MultiMapException(IDataRecord reader)
         {
             bool hasFields = false;

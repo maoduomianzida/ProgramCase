@@ -10,7 +10,7 @@ using AutoMapper;
 
 namespace ProgramCase.Newtonsoft
 {
-    [Main]
+    //[Main]
     public class NewtonsoftCase : ICase
     {
         public void Init()
