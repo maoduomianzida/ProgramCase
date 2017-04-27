@@ -52,7 +52,6 @@ namespace ProgramCase.Dapper
                 return JsonConvert.DeserializeObject(content, type) as TipMessageContent;
             }
 
-
             return null;
         }
 

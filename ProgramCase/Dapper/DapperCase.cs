@@ -13,6 +13,8 @@ using System.Threading;
 using System.Data.SqlClient;
 using Newtonsoft.Json.Schema.Generation;
 using Newtonsoft.Json.Schema;
+using Newtonsoft.Json;
+using System.Net.Http;
 
 namespace ProgramCase.Dapper
 {
@@ -58,7 +60,6 @@ namespace ProgramCase.Dapper
             JSchemaGenerator generator = new JSchemaGenerator();
             JSchema schema = generator.Generate(typeof(JoinGroupMessageContent));
 
-
             Console.WriteLine(schema);
         }
 
@@ -72,14 +73,12 @@ namespace ProgramCase.Dapper
             {
                 connection.ConnectionString = setting.ConnectionString;
                 connection.Open();
-                var sql = $"select * from ETeacher_Group_TipMessage";
-                /*dynamic obj = new ExpandoObject();
-                obj.ID = 1;
-                obj.Name = "wgsd"
-                
-                connection.Execute("inser test(userid,username) value(@ID,@Name) where 用户 = @用户",(object)obj);*/
-                var list = connection.Query<TipMessage>(sql, new { HomeworkID = homeworkIdArr.ToArray() }).AsList();
-                
+                var sql = @"select top 10 T1.*,T2.*,100 ReadStatus,'小兄弟，你怎么这么萌' Content,T3.* from ETeacher_Group_TipMessage T1 
+                                             INNER JOIN ETeacher_Group_Student T2 ON T1.ReceiverID = T2.ID 
+                                             INNER JOIN ETeacher_Group_StudentGroup T3 ON T2.ID = T3.StudentID ";
+                var list = connection.Query<TipMessage, Student, StudentGroup,Tuple<TipMessage,Student, StudentGroup>>(sql,(t1,t2,t3) => new Tuple<TipMessage, Student, StudentGroup>(t1,t2,t3),splitOn:"id,id").AsList();
+
+                Console.WriteLine(JsonConvert.SerializeObject(list,Formatting.Indented));
             }
         }
     }

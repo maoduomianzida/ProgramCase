@@ -76,6 +76,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -144,6 +145,8 @@
     <Compile Include="Dapper\HomeworkMessageContent.cs" />
     <Compile Include="Dapper\JoinGroupMessageContent.cs" />
     <Compile Include="Dapper\MessageContentTypeHandler.cs" />
+    <Compile Include="Dapper\Student.cs" />
+    <Compile Include="Dapper\StudentGroup.cs" />
     <Compile Include="Dapper\TipMessage.cs" />
     <Compile Include="Dapper\TipMessageContent.cs" />
     <Compile Include="ICase.cs" />
