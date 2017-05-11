@@ -15,10 +15,12 @@ using Newtonsoft.Json.Schema.Generation;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json;
 using System.Net.Http;
+using System.Net;
+using System.Net.Sockets;
 
 namespace ProgramCase.Dapper
 {
-    [Main]
+    //[Main]
     public class DapperCase : ICase
     {
         public class TeachInfo
@@ -63,9 +65,36 @@ namespace ProgramCase.Dapper
             Console.WriteLine(schema);
         }
 
+        public void BatchAdd()
+        {
+            ConnectionStringSettings setting = ConfigurationManager.ConnectionStrings["conn"];
+            DbProviderFactory factory = DbProviderFactories.GetFactory(setting.ProviderName);
+            using (IDbConnection connection = factory.CreateConnection())
+            using (IDbTransaction trans = connection.BeginTransaction())
+            {
+                connection.ConnectionString = setting.ConnectionString;
+                connection.Open();
+
+                var sql = @"insert table(A1,A2) values(@A1,@A2)";
+                var list = connection.Execute(new CommandDefinition(sql,new object[]{ new { A1 = "1", A2 = "用户1" },new { A1 = "2", A2 = "用户2" } } , trans,flags: CommandFlags.Buffered | CommandFlags.Pipelined));
+
+                Console.WriteLine(JsonConvert.SerializeObject(list, Formatting.Indented));
+            }
+        }
+
+        public class Temp : IDisposable
+        {
+            public void Dispose()
+            {
+                Console.WriteLine("释放");
+            }
+        }
+
         public void Run()
         {
-            ConnectionStringSettings setting =  ConfigurationManager.ConnectionStrings["conn"];
+            Console.WriteLine(Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(x => x.AddressFamily == AddressFamily.InterNetwork).ToString());
+            return;
+                ConnectionStringSettings setting = ConfigurationManager.ConnectionStrings["conn"];
             DbProviderFactory factory = DbProviderFactories.GetFactory(setting.ProviderName);
             IEnumerable<int> homeworkIdArr = new int[] {  190 ,90};
             SqlMapper.AddTypeHandler(new MessageContentTypeHandler());
@@ -73,6 +102,7 @@ namespace ProgramCase.Dapper
             {
                 connection.ConnectionString = setting.ConnectionString;
                 connection.Open();
+                  
                 var sql = @"select top 10 T1.*,T2.*,100 ReadStatus,'小兄弟，你怎么这么萌' Content,T3.* from ETeacher_Group_TipMessage T1 
                                              INNER JOIN ETeacher_Group_Student T2 ON T1.ReceiverID = T2.ID 
                                              INNER JOIN ETeacher_Group_StudentGroup T3 ON T2.ID = T3.StudentID ";

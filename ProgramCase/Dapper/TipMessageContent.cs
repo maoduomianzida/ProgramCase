@@ -8,5 +8,9 @@ namespace ProgramCase.Dapper
 {
     public abstract  class TipMessageContent
     {
+        /// <summary>
+        /// 消息内容ID
+        /// </summary>
+        public int ID { get; set; }
     }
 }

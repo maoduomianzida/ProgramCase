@@ -1670,6 +1670,7 @@ namespace Dapper
             return reader => handler.Parse(type, reader.GetValue(startBound));
         }
 
+
         private static Exception MultiMapException(IDataRecord reader)
         {
             bool hasFields = false;
@@ -2231,10 +2232,37 @@ namespace Dapper
         {
             return CreateParamInfoGenerator(identity, checkForDuplicates, removeUnused, GetLiteralTokens(identity.sql));
         }
+        static bool IsValueTuple(Type type) => type != null && type.IsValueType() && type.FullName.StartsWith("System.ValueTuple`");
+
+        static List<IMemberMap> GetValueTupleMembers(Type type, string[] names)
+        {
+            var fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance);
+            var result = new List<IMemberMap>(names.Length);
+            for(int i = 0; i < names.Length; i++)
+            {
+                FieldInfo field = null;
+                string name = "Item" + (i + 1).ToString(CultureInfo.InvariantCulture);
+                foreach(var test in fields)
+                {
+                    if(test.Name == name)
+                    {
+                        field = test;
+                        break;
+                    }
+                }
+                result.Add(field == null ? null : new SimpleMemberMap(string.IsNullOrWhiteSpace(names[i]) ? name : names[i], field));
+            }
+            return result;
+        }
 
         internal static Action<IDbCommand, object> CreateParamInfoGenerator(Identity identity, bool checkForDuplicates, bool removeUnused, IList<LiteralToken> literals)
         {
             Type type = identity.parametersType;
+
+            if (IsValueTuple(type))
+            {
+                throw new NotSupportedException("ValueTuple should not be used for parameters - the language-level names are not available to use as parameter names, and it adds unnecessary boxing");
+            }
 
             bool filterParams = false;
             if (removeUnused && identity.commandType.GetValueOrDefault(CommandType.Text) == CommandType.Text)
@@ -2923,7 +2951,6 @@ namespace Dapper
             ITypeMap typeMap = GetTypeMap(type);
 
             int index = startBound;
-
             ConstructorInfo specializedConstructor = null;
 
 #if !COREFX
@@ -3009,9 +3036,9 @@ namespace Dapper
                 il.Emit(OpCodes.Ldloc_1);// [target]
             }
 
-            var members = (specializedConstructor != null
+            var members = IsValueTuple(type) ? GetValueTupleMembers(type, names) :((specializedConstructor != null
                 ? names.Select(n => typeMap.GetConstructorParameter(specializedConstructor, n))
-                : names.Select(n => typeMap.GetMember(n))).ToList();
+                : names.Select(n => typeMap.GetMember(n))).ToList());
 
             // stack is now [target]
 
