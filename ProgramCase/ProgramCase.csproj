@@ -104,9 +104,13 @@
     <Compile Include="AutoMapper\JsonFormatterStringConverter.cs" />
     <Compile Include="CircuitBreaker\CircuitBreaker.cs" />
     <Compile Include="CircuitBreaker\CircuitBreakerCase.cs" />
+    <Compile Include="CircuitBreaker\CircuitBreakerSetting.cs" />
     <Compile Include="CircuitBreaker\CircuitBreakerState.cs" />
+    <Compile Include="CircuitBreaker\CloseState.cs" />
     <Compile Include="CircuitBreaker\Exception\RemoteResourceException.cs" />
     <Compile Include="CircuitBreaker\Extension\TimerExtension.cs" />
+    <Compile Include="CircuitBreaker\HalfOpenState.cs" />
+    <Compile Include="CircuitBreaker\OpenState.cs" />
     <Compile Include="Dapper\DapperCase.cs" />
     <Compile Include="Dapper\DapperSourceCode\CommandDefinition.cs" />
     <Compile Include="Dapper\DapperSourceCode\CommandFlags.cs" />
