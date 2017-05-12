@@ -42,7 +42,7 @@ namespace ProgramCase.CircuitBreaker
             int executeNums = Interlocked.Increment(ref _currentExecuteNums);
             if (executeNums > _allowExecuteNums)
             {
-                throw new Exception($"已经超过了半开状态允许请求的次数限制（{_allowExecuteNums}）");
+                throw new CircuitBreakerException($"已经超过了半开状态允许请求的次数限制（{_allowExecuteNums}次）");
             }
         }
 

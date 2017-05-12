@@ -20,8 +20,8 @@ namespace ProgramCase.CircuitBreaker
             context = new CircuitBreaker(new CircuitBreakerSetting
             {
                 ProtectAction = Fail,
-                AllowFailInterval = TimeSpan.FromSeconds(4),
-                AllowFailTimes = 11,
+                AllowFailInterval = TimeSpan.FromSeconds(5),
+                AllowFailTimes = 3,
                 ExceptionProcess = err => Console.WriteLine(err.Message),
                 HalfOpenDuration = TimeSpan.FromSeconds(5),
                 HalfOpenRequestLimit = 3

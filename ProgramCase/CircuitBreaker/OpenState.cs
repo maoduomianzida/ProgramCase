@@ -38,12 +38,12 @@ namespace ProgramCase.CircuitBreaker
 
         public override void ProcessSuccess()
         {
-            throw new RemoteResourceException("熔断器开启状态下无法执行ProcessSuccess方法");
+            throw new CircuitBreakerException("熔断器开启状态下无法执行ProcessSuccess方法");
         }
 
         public override void ProcessBefore()
         {
-            throw new RemoteResourceException("熔断器开启状态下无法执行ProcessBefore方法");
+            throw new CircuitBreakerException("熔断器开启状态下无法执行ProcessBefore方法");
         }
 
         public override void Clear()
