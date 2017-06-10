@@ -39,6 +39,9 @@
     <Reference Include="AutoMapper, Version=6.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="Consul, Version=0.7.2.3, Culture=neutral, PublicKeyToken=20a6ad9a81df1d95, processorArchitecture=MSIL">
+      <HintPath>..\packages\Consul.0.7.2.3\lib\net45\Consul.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
       <Private>True</Private>
@@ -112,6 +115,7 @@
     <Compile Include="CircuitBreaker\Extension\TimerExtension.cs" />
     <Compile Include="CircuitBreaker\HalfOpenState.cs" />
     <Compile Include="CircuitBreaker\OpenState.cs" />
+    <Compile Include="Consul\ConsulCase.cs" />
     <Compile Include="Dapper\DapperCase.cs" />
     <Compile Include="Dapper\DapperSourceCode\CommandDefinition.cs" />
     <Compile Include="Dapper\DapperSourceCode\CommandFlags.cs" />
@@ -165,6 +169,8 @@
     <Compile Include="Dapper\StudentGroup.cs" />
     <Compile Include="Dapper\TipMessage.cs" />
     <Compile Include="Dapper\TipMessageContent.cs" />
+    <Compile Include="Dictionary\CollectionCase.cs" />
+    <Compile Include="DynamicProxy\DynamicProxyCase.cs" />
     <Compile Include="ICase.cs" />
     <Compile Include="AutoMapper\LongToDateTimeConverter.cs" />
     <Compile Include="MainAttribute.cs" />
@@ -220,6 +226,10 @@
     <Compile Include="Dapper\DapperExtension\SqlMapper.SqlExecuteContext.cs" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="data\thrift.txt" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -7,15 +8,24 @@ using System.Threading.Tasks;
 
 namespace ProgramCase.CircuitBreaker
 {
-    [Main]
+    //[Main]
     public class CircuitBreakerCase : ICase
     {
         private CircuitBreaker context;
 
         private bool haveError = true;
 
+        public interface A
+        { }
+
+        public interface B : A
+        { }
+
         public void Run()
         {
+            Console.WriteLine(typeof(A).IsAssignableFrom(typeof(A)));
+
+            return;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             context = new CircuitBreaker(new CircuitBreakerSetting
             {
